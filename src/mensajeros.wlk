@@ -33,15 +33,9 @@ object matrix{
 object roberto{
 	var peso
 	var transporte
-	var cantAcoplados
 	
-	method pesoQueCuenta() {
-		if(transporte == "bicicleta"){
-		 return peso + 1
-	}   if(transporte == "camion"){
-		 return peso + 500 * cantAcoplados
-	} return 0
-	}
+    method pesoQueCuenta() = peso + transporte.peso()
+	
 	method puedeHacerUnaLlamada() = false
 	
 	method suPeso(suPeso) {
@@ -50,9 +44,7 @@ object roberto{
 	method suTransporte(suTransporte){
 		transporte = suTransporte
 	}
-	method cantAcoplados(acoplados){
-		cantAcoplados = acoplados
-	}
+
 }
  
 object chuckNorris {
@@ -73,4 +65,19 @@ object neo{
 	method suCredito(estado){
 		estadoCredito = estado
 	}
+}
+
+
+// Transportes:
+object camion{
+	var cantAcoplados
+	
+	method peso() = 500 * cantAcoplados
+	
+	method cantAcoplados(acoplados){
+		cantAcoplados = acoplados
+	}
+}
+object bicicleta{
+	method peso() = 1
 }

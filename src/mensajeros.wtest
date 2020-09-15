@@ -4,8 +4,8 @@ describe "Paquete puede ser entregado por mensajero" {
 	
 	test "Roberto puede entregar en camion un paquete pago en puente de Brooklin" {
       roberto.suPeso(90)
-      roberto.suTransporte("camion")
-      roberto.cantAcoplados(1)
+      roberto.suTransporte(camion)
+      camion.cantAcoplados(1)
       paquete.estadoPago(true)
       paquete.elMensajero(roberto)
       paquete.elDestino(puenteDeBrooklin)
@@ -13,8 +13,8 @@ describe "Paquete puede ser entregado por mensajero" {
 	}
 	test "Roberto no puede entregar un paquete pago en matrix" {
       roberto.suPeso(90)
-      roberto.suTransporte("camion")
-      roberto.cantAcoplados(1)
+      roberto.suTransporte(camion)
+      camion.cantAcoplados(1)
       paquete.estadoPago(true)
       paquete.elMensajero(roberto)
       paquete.elDestino(matrix)
@@ -39,7 +39,7 @@ describe "Paquete puede ser entregado por mensajero" {
 	}
 	test "Roberto puede entregar en bicicleta un paquete pago en puente de Brooklin" {
       roberto.suPeso(90)
-      roberto.suTransporte("bicicleta")
+      roberto.suTransporte(bicicleta)
       paquete.estadoPago(true)
       paquete.elMensajero(roberto)
       paquete.elDestino(puenteDeBrooklin)
