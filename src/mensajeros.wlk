@@ -1,23 +1,55 @@
 // Mensajeros de pelicula, primera parte
 
 object paquete {
-	var mensajero
 	var pago
 	var destino
+	const precio = 50
  
-    method puedeSerEntregado() = self.estaPago() and destino.dejaPasar(mensajero)
+    method puedeSerEntregado(mensajero) = self.estaPago() and destino.dejaPasar(mensajero)
     
     method estaPago() = pago
     
     method estadoPago(estado) {
     	pago = estado
    }
-   method elMensajero(mensajeroAsignado) {
-   	    mensajero = mensajeroAsignado
-   }
    method elDestino(destinoAsignado) {
    	    destino = destinoAsignado
    }
+   method precio() = precio
+}
+
+object paquetito {
+	var precio = 0
+	
+	method estaPago() = true
+	
+	method puedeSerEntregado(mensajero) = true
+	
+	method precio() = precio
+}
+
+object paquetonViajero {
+	const precio = 100
+	var pagoParcial
+	var destinos = []
+	
+	method puedeSerEntregado(mensajero) = self.estaPago() and destinos.all().dejaPasar(mensajero)
+	
+	method estaPago() = self.estaPagoTotalmente()
+	
+	method estaPagoTotalmente() = pagoParcial == precio
+	
+	method  pagoParcial(pago) {
+		pagoParcial = pagoParcial + pago
+	} 
+	
+    method precio() = precio
+}
+
+object nuevoPaquete {
+	const precio = 10
+	method puedeSerEntregado(mensajero) = true
+	method precio() = precio
 }
 
 // Destinos:
@@ -31,7 +63,7 @@ object matrix{
 
 // Mensajeros:
 object roberto{
-	var peso
+	var peso = 0
 	var transporte
 	
     method pesoQueCuenta() = peso + transporte.peso()
@@ -44,7 +76,6 @@ object roberto{
 	method suTransporte(suTransporte){
 		transporte = suTransporte
 	}
-
 }
  
 object chuckNorris {
@@ -65,8 +96,12 @@ object neo{
 	method suCredito(estado){
 		estadoCredito = estado
 	}
+	method puedeEntregarlo(unPaquete) = unPaquete.puedeSerEntregado(neo)
 }
 
+object nuevoMensajero {
+	method pesoQueCuenta() = 10
+}
 
 // Transportes:
 object camion{

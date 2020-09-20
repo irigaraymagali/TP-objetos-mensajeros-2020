@@ -1,3 +1,83 @@
 import mensajeria.*
 import mensajeros.*
 
+describe "Mensajeria grande, con sobrepeso y su facturacion"{
+	test "La mensajeria con 3 mensajeros es grande" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(chuckNorris)
+     mensajeria.contratarMensajero(roberto)
+     assert.that(mensajeria.esGrande())
+	}
+    test "La mensajeria con solo Neo de mensajero no es grande" {
+     mensajeria.contratarMensajero(neo)
+     assert.notThat(mensajeria.esGrande())
+	}
+    test "La mensajeria con Neo y Chuck Norris de mensajeros no tiene sobrepeso" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(chuckNorris)
+     assert.notThat(mensajeria.tieneSobrepeso())
+	}	
+	test "La mensajeria con Chuck Norris de mensajero tiene sobrepeso" {
+     mensajeria.contratarMensajero(chuckNorris)
+     assert.that(mensajeria.tieneSobrepeso())
+	}	
+	test "La facturacion de la mensajeria" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.enviarPaquete(nuevoPaquete)
+     assert.equals(10,mensajeria.facturacion())
+	}	
+}
+
+describe "El peso del ultimo mensajero"{
+	test "El peso del ultimo mensajero Chuck Norris es 900kg" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(nuevoMensajero)
+     assert.equals(10,mensajeria.pesoUltimoMensajero())
+	}
+    test "El peso del ultimo mensajero Neo es 0kg" {
+     mensajeria.contratarMensajero(neo)
+     assert.equals(0,mensajeria.pesoUltimoMensajero())
+	}		
+}
+
+describe "Entrega del paquete"{
+	test "El primer mensajero entrega el paquetito" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(nuevoMensajero)
+     assert.that(mensajeria.elPrimeroPuedeEntregarlo(paquetito))
+	}
+	test "El primer mensajero no puede entregar el paqueton viajero" {
+     mensajeria.contratarMensajero(chuckNorris)
+     mensajeria.contratarMensajero(nuevoMensajero)
+     assert.notThat(mensajeria.elPrimeroPuedeEntregarlo(paquetonViajero))
+	}
+	
+	test "El paquetito puede ser entregado" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(nuevoMensajero)
+     assert.that(mensajeria.puedeEntregarPaquete(paquetito))
+	}
+	test "El paqueton viajero no puede ser entregado" {
+     mensajeria.contratarMensajero(chuckNorris)
+     assert.notThat(mensajeria.puedeEntregarPaquete(paquetonViajero))
+	}
+	
+	
+	test "Neo y Chuck Norris pueden entregar el paquetito" {
+     mensajeria.contratarMensajero(neo)
+     mensajeria.contratarMensajero(chuckNorris)
+     assert.equals(#{chuckNorris, neo},mensajeria.losQueLoPuedenEntregar(paquetito))
+	}
+	
+	
+	                 // enviar paquete
+	
+	
+	
+	                 // enviar a todos
+	}
+	
+	
+	
+
+	

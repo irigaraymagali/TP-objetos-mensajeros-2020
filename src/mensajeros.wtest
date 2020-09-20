@@ -7,42 +7,37 @@ describe "Paquete puede ser entregado por mensajero" {
       roberto.suTransporte(camion)
       camion.cantAcoplados(1)
       paquete.estadoPago(true)
-      paquete.elMensajero(roberto)
       paquete.elDestino(puenteDeBrooklin)
-      assert.that(paquete.puedeSerEntregado())
+      assert.that(paquete.puedeSerEntregado(roberto))
 	}
 	test "Roberto no puede entregar un paquete pago en matrix" {
       roberto.suPeso(90)
       roberto.suTransporte(camion)
       camion.cantAcoplados(1)
       paquete.estadoPago(true)
-      paquete.elMensajero(roberto)
       paquete.elDestino(matrix)
-      assert.notThat(paquete.puedeSerEntregado())
+      assert.notThat(paquete.puedeSerEntregado(roberto))
 	}
 	test "Neo con crédito no puede llevar un paquete que no esta pago a la matrix" {
       neo.suCredito(false)
       paquete.estadoPago(false)
-      paquete.elMensajero(neo)
       paquete.elDestino(matrix)
-      assert.notThat(paquete.puedeSerEntregado())
+      assert.notThat(paquete.puedeSerEntregado(neo))
 	}
 	test "Nadie puede llevar un paquete que no esta pago" {
       paquete.estadoPago(false)
-      assert.notThat(paquete.puedeSerEntregado())
+      assert.notThat(paquete.puedeSerEntregado(neo))
 	}
     test "ChuckNorris puede llevar un paquete que esta pago" {
-      paquete.elMensajero(chuckNorris)
       paquete.elDestino(matrix)
       paquete.estadoPago(true)
-      assert.that(paquete.puedeSerEntregado())
+      assert.that(paquete.puedeSerEntregado(chuckNorris))
 	}
 	test "Roberto puede entregar en bicicleta un paquete pago en puente de Brooklin" {
       roberto.suPeso(90)
       roberto.suTransporte(bicicleta)
       paquete.estadoPago(true)
-      paquete.elMensajero(roberto)
       paquete.elDestino(puenteDeBrooklin)
-      assert.that(paquete.puedeSerEntregado())
+      assert.that(paquete.puedeSerEntregado(roberto))
 	}
 	}
