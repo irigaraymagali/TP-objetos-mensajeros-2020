@@ -56,6 +56,7 @@ object nuevoPaquete {
 object puenteDeBrooklin{
 	method dejaPasar(mensajero) = mensajero.pesoQueCuenta() < 1000
 }
+
 object matrix{
 	method dejaPasar(mensajero) = mensajero.puedeHacerUnaLlamada()
 }

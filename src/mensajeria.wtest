@@ -99,7 +99,8 @@ describe "Entrega del paquete"{
 		mensajeria.enviarPaquete(paquetonViajero)	
 		assert.equals(0,mensajeria.cantidadPaquetesEnviados())
 		assert.equals(1,mensajeria.cantidadPaquetesPendientes())
-	}	                
+	}	    
+	            
     test "Mensajeria envia todos los paquetes"{
 		mensajeria.contratarMensajero(neo)
 		mensajeria.contratarMensajero(nuevoMensajero)

@@ -82,7 +82,7 @@ object mensajeria {
  
  // Punto 8 : agregado en mensajeros.wlk
  
- // Para los tests 
+ // Para los tests:
  method cantidadPaquetesEnviados() = paquetesEnviados.size()
  method cantidadPaquetesPendientes() = paquetesPendientes.size() 
  method cantidadPaquetes() = paquetes.size()
