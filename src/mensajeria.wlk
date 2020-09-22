@@ -1,14 +1,14 @@
 import mensajeros.*
 
 object mensajeria {
- var mensajeros = #{}
+ var mensajeros = #{}  
  var paquetesPendientes = []
  var paquetesEnviados = []
  var paquetes = []
 
   
- method contratarMensajero(nuevoMensajero){
- 	mensajeros.add(nuevoMensajero)
+ method contratarMensajero(unNuevoMensajero){
+ 	mensajeros.add(unNuevoMensajero)
  }
  
  method despedirMensajero(mensajeroDespedido){
@@ -32,7 +32,6 @@ object mensajeria {
  method agregarPaquete(unPaquete){
  	paquetes.add(unPaquete)
  }     
-
  
  
  // Punto 1
@@ -58,9 +57,9 @@ object mensajeria {
  }
 
  // Punto 5
- method facturacion() = self.precios().sum()   
+ method facturacion() = self.preciosPaquetes().sum()   
  
- method precios() = paquetesEnviados.map({unPaquete => unPaquete.precio()})
+ method preciosPaquetes() = paquetesEnviados.map({unPaquete => unPaquete.precio()})
  
  // Punto 6
  method enviarTodos() = paquetes.forEach({paqueteAEnviar => self.enviarPaquete(paqueteAEnviar)})
@@ -69,16 +68,26 @@ object mensajeria {
  method enviarElMasCaro() {    
  	if(self.puedeEntregarPaquete(self.elPendienteMasCaro())){
  		self.enviarPaquete(self.elPendienteMasCaro())
- 	    paquetesPendientes.remove(self.elPendienteMasCaro())  // FALLA
+ 	    self.actualizarPendientes(self.elPendienteMasCaro())
  	} else {
- 		// no hace nada
+ 		// Si no puede enviarlo => no hace nada.
  	}
  } 
  
  method elPendienteMasCaro() = paquetesPendientes.max({unPaquete => unPaquete.precio()})
  
+ method actualizarPendientes(paqueteEnviado) {
+ 	paquetesPendientes.remove(paqueteEnviado)
+ }
+ 
  // Punto 8 : agregado en mensajeros.wlk
  
+ // Para los tests 
+ method cantidadPaquetesEnviados() = paquetesEnviados.size()
+ method cantidadPaquetesPendientes() = paquetesPendientes.size() 
+ method cantidadPaquetes() = paquetes.size()
+ method cantidadMensajeros() = mensajeros.size()
+    
  }
 
 

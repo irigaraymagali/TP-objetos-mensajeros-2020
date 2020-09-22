@@ -1,7 +1,28 @@
 import mensajeria.*
 import mensajeros.*
 
+describe "Contratar y despedir mensajeros de la mensajeria"{
+	test "La mensajeria contrata 2 mensajeros"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.contratarMensajero(chuckNorris)
+		assert.equals(2,mensajeria.cantidadMensajeros())
+	}
+	test "La mensajeria despide un mensajero"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.contratarMensajero(chuckNorris)
+		mensajeria.despedirMensajero(chuckNorris)
+		assert.equals(1,mensajeria.cantidadMensajeros())
+	}
+	test "La mensajeria despide a todos los mensajeros"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.contratarMensajero(chuckNorris)
+		mensajeria.despedirATodos()
+		assert.equals(0,mensajeria.cantidadMensajeros())
+	}
+}
+
 describe "Mensajeria grande, con sobrepeso y su facturacion"{
+	
 	test "La mensajeria con 3 mensajeros es grande" {
      mensajeria.contratarMensajero(neo)
      mensajeria.contratarMensajero(chuckNorris)
@@ -41,41 +62,62 @@ describe "El peso del ultimo mensajero"{
 }
 
 describe "Entrega del paquete"{
-	test "El primer mensajero entrega el paquetito" {
+	test "Neo, el primer mensajero puede entregar el paquetito" {
      mensajeria.contratarMensajero(neo)
      mensajeria.contratarMensajero(nuevoMensajero)
      assert.that(mensajeria.elPrimeroPuedeEntregarlo(paquetito))
 	}
-	test "El primer mensajero no puede entregar el paqueton viajero" {
+	test "Chuck Norris, el primer mensajero no puede entregar el paqueton viajero" {
      mensajeria.contratarMensajero(chuckNorris)
      mensajeria.contratarMensajero(nuevoMensajero)
      assert.notThat(mensajeria.elPrimeroPuedeEntregarlo(paquetonViajero))
 	}
 	
-	test "El paquetito puede ser entregado" {
+	test "El paquetito puede ser entregado por mensajeria" {
      mensajeria.contratarMensajero(neo)
      mensajeria.contratarMensajero(nuevoMensajero)
      assert.that(mensajeria.puedeEntregarPaquete(paquetito))
 	}
-	test "El paqueton viajero no puede ser entregado" {
+	test "El paqueton viajero no puede ser entregado por mensajeria" {
      mensajeria.contratarMensajero(chuckNorris)
      assert.notThat(mensajeria.puedeEntregarPaquete(paquetonViajero))
 	}
-	
-	
+		
 	test "Neo y Chuck Norris pueden entregar el paquetito" {
      mensajeria.contratarMensajero(neo)
      mensajeria.contratarMensajero(chuckNorris)
      assert.equals(#{chuckNorris, neo},mensajeria.losQueLoPuedenEntregar(paquetito))
 	}
 	
-	
-	                 // enviar paquete
-	
-	
-	
-	                 // enviar a todos
+	test "Mensajeria envia el nuevo paquete"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.enviarPaquete(nuevoPaquete)
+		assert.equals(1,mensajeria.cantidadPaquetesEnviados())
 	}
+	test "Mensajeria no puede enviar el paqueton viajero"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.enviarPaquete(paquetonViajero)	
+		assert.equals(0,mensajeria.cantidadPaquetesEnviados())
+		assert.equals(1,mensajeria.cantidadPaquetesPendientes())
+	}	                
+    test "Mensajeria envia todos los paquetes"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.contratarMensajero(nuevoMensajero)
+		mensajeria.agregarPaquete(paquetito)
+		mensajeria.agregarPaquete(nuevoPaquete)
+		mensajeria.enviarTodos()
+		assert.equals(2,mensajeria.cantidadPaquetes())
+	}
+
+	   test "Mensajeria envia el paquete pendiente mas caro"{
+		mensajeria.contratarMensajero(neo)
+		mensajeria.enviarPaquete(paquetonViajero)
+		//mensajeria.enviarPaquete(paquetito)
+		mensajeria.enviarElMasCaro()
+		assert.equals(1,mensajeria.cantidadPaquetesPendientes())
+	}          
+	                 
+}
 	
 	
 	
