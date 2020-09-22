@@ -33,7 +33,7 @@ object paquetonViajero {
 	var pagoParcial
 	var destinos = []
 	
-	method puedeSerEntregado(mensajero) = self.estaPago() and destinos.all().dejaPasar(mensajero)
+	method puedeSerEntregado(mensajero) = self.estaPago() and destinos.all({destino => destino.dejaPasar(mensajero)})
 	
 	method estaPago() = self.estaPagoTotalmente()
 	
@@ -96,7 +96,6 @@ object neo{
 	method suCredito(estado){
 		estadoCredito = estado
 	}
-	method puedeEntregarlo(unPaquete) = unPaquete.puedeSerEntregado(neo)
 }
 
 object nuevoMensajero {
