@@ -29,21 +29,20 @@ object paquetito {
 }
 
 object paquetonViajero {
-	const precio = 100
-	var pagoParcial
+	var pagoParcial = 0
 	var destinos = []
 	
 	method puedeSerEntregado(mensajero) = self.estaPago() and destinos.all({destino => destino.dejaPasar(mensajero)})
 	
 	method estaPago() = self.estaPagoTotalmente()
 	
-	method estaPagoTotalmente() = pagoParcial == precio
+	method estaPagoTotalmente() = pagoParcial == self.precio()
 	
 	method  pagoParcial(pago) {
 		pagoParcial = pagoParcial + pago
 	} 
 	
-    method precio() = precio
+    method precio() = 100 * destinos.size()
 }
 
 object nuevoPaquete {
@@ -101,6 +100,8 @@ object neo{
 
 object nuevoMensajero {
 	method pesoQueCuenta() = 10
+	
+	method puedeHacerUnaLlamada() = true
 }
 
 // Transportes:

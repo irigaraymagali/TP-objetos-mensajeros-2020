@@ -1,7 +1,7 @@
 import mensajeros.*
 
 object mensajeria {
- var mensajeros = #{}  
+ var mensajeros = [] 
  var paquetesPendientes = []
  var paquetesEnviados = []
  var paquetes = []
@@ -19,11 +19,11 @@ object mensajeria {
  
  method elPrimeroPuedeEntregarlo(paqueteAEntregar) = paqueteAEntregar.puedeSerEntregado(self.elPrimero())
  
- method elPrimero() = mensajeros.asList().first()
+ method elPrimero() = mensajeros.first()
           
  method pesoUltimoMensajero() = self.elUltimo().pesoQueCuenta()
  
- method elUltimo() = mensajeros.asList().last()
+ method elUltimo() = mensajeros.last()
  
  method despedirATodos() {
  	mensajeros.forEach({mensajero => self.despedirMensajero(mensajero)}) 
@@ -69,9 +69,7 @@ object mensajeria {
  	if(self.puedeEntregarPaquete(self.elPendienteMasCaro())){
  		self.enviarPaquete(self.elPendienteMasCaro())
  	    self.actualizarPendientes(self.elPendienteMasCaro())
- 	} else {
- 		// Si no puede enviarlo => no hace nada.
- 	}
+ 	} 
  } 
  
  method elPendienteMasCaro() = paquetesPendientes.max({unPaquete => unPaquete.precio()})
